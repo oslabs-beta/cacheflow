@@ -2,7 +2,7 @@
   "name": "cacheflow",
   "version": "1.0.0",
   "description": "An advanced solution for all your graphQL queries",
-  "main": "index.js",
+  "main": "cacheflow.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
