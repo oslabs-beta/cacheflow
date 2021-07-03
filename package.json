@@ -1,6 +1,6 @@
 {
-  "name": "cacheflow",
-  "version": "1.0.0",
+  "name": "cacheflowql",
+  "version": "1.0.3",
   "description": "An advanced solution for all your graphQL queries",
   "main": "cacheflow.js",
   "scripts": {
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/oslabs-beta/cacheflow/issues"
   },
-  "homepage": "https://github.com/oslabs-beta/cacheflow#readme"
+  "homepage": "https://github.com/oslabs-beta/cacheflow#readme",
+  "dependencies": {
+    "redis": "^3.1.2"
+  }
 }
