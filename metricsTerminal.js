@@ -1,12 +1,6 @@
 const readline = require('readline');
 const fs = require('fs');
 
-const globalMetricsData = fs.readFileSync('./globalMetrics.json', 'utf-8');
-const jsonGMD = JSON.parse(globalMetricsData);
-
-const localMetricsData = fs.readFileSync('./localMetricsStorage.json', 'utf-8');
-const jsonLMD = JSON.parse(localMetricsData);
-
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -20,6 +14,12 @@ function terminalPrompt() {
         answer.toLowerCase() === 'global metrics' ||
         answer.toLowerCase() === 'global'
       ) {
+        const globalMetricsData = fs.readFileSync(
+          './globalMetrics.json',
+          'utf-8'
+        );
+        const jsonGMD = JSON.parse(globalMetricsData);
+
         console.log(
           '\n======================================================================================================='
         );
@@ -28,7 +28,31 @@ function terminalPrompt() {
             jsonGMD.totalNumberOfRequests +
             ' requests'
         );
+        console.log(
+          '\nAverage Number of Requests Per Resolver: ' +
+            jsonGMD.averageNumberOfCalls +
+            ' requests'
+        );
+        console.log(
+          '\nNumber of Uncached Requests: ' +
+            jsonGMD.numberOfUncachedRequests +
+            ' requests'
+        );
+        console.log(
+          '\nNumber of Cached Requests: ' +
+            jsonGMD.numberOfCachedRequests +
+            ' requests'
+        );
+        console.log(
+          '\nAverage Cached Latency: ' + jsonGMD.averageUncachedLatency + ' ms'
+        );
+        console.log(
+          '\nAverage Cached Latency: ' + jsonGMD.averageCachedLatency + ' ms'
+        );
         console.log('Total Time Saved: ' + jsonGMD.totalTimeSaved + ' ms');
+        console.log(
+          '\nUnique Resolvers: ' + jsonGMD.uniqueResolvers + ' requests'
+        );
         console.log(
           'Total Amount of Data Saved to Redis: ' +
             jsonGMD.sizeOfDataRedis +
@@ -43,6 +67,12 @@ function terminalPrompt() {
           '\n======================================================================================================='
         );
       } else {
+        const localMetricsData = fs.readFileSync(
+          './localMetricsStorage.json',
+          'utf-8'
+        );
+        const jsonLMD = JSON.parse(localMetricsData);
+
         if (jsonLMD[answer]) {
           console.log(
             '\n=======================================================================================================',
@@ -64,6 +94,12 @@ function terminalPrompt() {
             jsonLMD[answer].averageCallSpan === 'Insufficient Data'
               ? 'Insufficient Data'
               : jsonLMD[answer].averageCallSpan + ' ms'
+          );
+          console.log(
+            'Uncached Latency: ' + jsonLMD[answer].uncachedCallTime + ' ms'
+          );
+          console.log(
+            'Cached Latency: ' + jsonLMD[answer].cachedCallTime + ' ms'
           );
           console.log(
             'Time Saved by Caching: ' +
