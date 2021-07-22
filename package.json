@@ -18,5 +18,8 @@
   "homepage": "https://github.com/oslabs-beta/cacheflow#readme",
   "dependencies": {
     "redis": "^3.1.2"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
   }
 }
